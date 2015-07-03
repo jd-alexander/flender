@@ -6,6 +6,7 @@ import org.aspectj.tools.ajc.Main
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
+
 group = 'com.github.jd-alexander'
 version = '1.0'
 
@@ -66,3 +67,6 @@ android.libraryVariants.all { variant ->
         }
     }
 }
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+

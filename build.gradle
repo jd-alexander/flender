@@ -3,15 +3,12 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url uri('C:\\Users\\Joel\\.m2')
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7'
         classpath 'org.aspectj:aspectjtools:1.8.5'
         classpath "com.github.dcendents:android-maven-plugin:1.2"
 
