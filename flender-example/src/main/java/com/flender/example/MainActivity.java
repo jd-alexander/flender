@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Flender.init(this);
-        test();
+        testMethod();
     }
 
     @InternetRequired("Silent")
-    public void test()
+    public void testMethod()
     {
         Toast.makeText(this,"Method is being called",Toast.LENGTH_SHORT).show();
     }

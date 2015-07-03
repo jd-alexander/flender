@@ -7,6 +7,8 @@ package com.flender.weaving;
 import android.util.Log;
 
 import com.flender.weaving.annotations.InternetRequired;
+import com.flender.weaving.annotations.MobileRequired;
+import com.flender.weaving.annotations.WiFiRequired;
 import com.flender.weaving.exception.UnsupportedModeException;
 
 import org.aspectj.lang.JoinPoint;
@@ -71,7 +73,7 @@ class FlenderAspect {
         if (Flender.isConnectedWifi()) {
             joinPoint.proceed();
         } else {
-            String mode = getInternetAnnotationParameter(joinPoint);
+            String mode = getWiFiAnnotationParameter(joinPoint);
 
             if (mode == "silent") {
                 Flender.Toast("Silent works available");
@@ -95,7 +97,7 @@ class FlenderAspect {
         if (Flender.isConnectedMobile()) {
             joinPoint.proceed();
         } else {
-            String mode = getInternetAnnotationParameter(joinPoint);
+            String mode = getMobileAnnotationParameter(joinPoint);
 
             if (mode == "silent") {
                 Flender.Toast("Silent works available");
@@ -116,6 +118,20 @@ class FlenderAspect {
     static String getInternetAnnotationParameter(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String value = signature.getMethod().getAnnotation(InternetRequired.class).value().toLowerCase();
+
+        return value;
+    }
+
+    static String getWiFiAnnotationParameter(JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String value = signature.getMethod().getAnnotation(WiFiRequired.class).value().toLowerCase();
+
+        return value;
+    }
+
+    static String getMobileAnnotationParameter(JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String value = signature.getMethod().getAnnotation(MobileRequired.class).value().toLowerCase();
 
         return value;
     }
