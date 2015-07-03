@@ -1,0 +1,1 @@
+include ':app', ':flender-runtime', ':flender-plugin', ':flender-example'
