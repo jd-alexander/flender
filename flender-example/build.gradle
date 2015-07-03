@@ -25,6 +25,8 @@ dependencies {
 buildscript {
     repositories {
         mavenCentral()
+
+        //Only necessary when developing locally.
         mavenLocal()
     }
 
