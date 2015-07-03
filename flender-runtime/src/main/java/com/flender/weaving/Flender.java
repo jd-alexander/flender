@@ -75,8 +75,8 @@ public class Flender {
         Toast.makeText(contextWeakReference.get(), text, Toast.LENGTH_LONG).show();
     }
 
-    public void setInternetUnavailableListener(InternetUnavailable internetUnavailableListener) {
-        this.internetUnavailable = internetUnavailableListener;
+    public static void setInternetUnavailable(InternetUnavailable internetUnavailable) {
+        Flender.internetUnavailable = internetUnavailable;
     }
 
     protected static InternetUnavailable getInternetUnavailable() {

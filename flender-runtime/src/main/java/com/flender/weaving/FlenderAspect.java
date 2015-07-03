@@ -4,8 +4,6 @@ package com.flender.weaving;
  * Created by Joel on 02/07/2015.
  */
 
-import android.util.Log;
-
 import com.flender.weaving.annotations.InternetRequired;
 import com.flender.weaving.annotations.MobileRequired;
 import com.flender.weaving.annotations.WiFiRequired;
@@ -23,18 +21,19 @@ import org.aspectj.lang.reflect.MethodSignature;
  */
 
 @Aspect
-class FlenderAspect {
+public class FlenderAspect {
 
     private static final String INTERNET = "execution(@com.flender.weaving.annotations.InternetRequired * *(..))";
     private static final String WIFI = "execution(@com.flender.weaving.annotations.WiFiRequired * *(..))";
     private static final String MOBILE = "execution(@com.flender.weaving.annotations.MobileRequired * *(..))";
+
 
     @Pointcut(value = INTERNET)
     public void internetAnnotatedMethod() {
     }
 
     @Pointcut(value = WIFI)
-    public void wifiAnnotatedMethod() {
+    public void wiFiAnnotatedMethod() {
     }
 
     @Pointcut(value = MOBILE)
@@ -44,17 +43,14 @@ class FlenderAspect {
 
     @Around("internetAnnotatedMethod()")
     public void checkInternetConnectivity(ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.v("Aspect", "advice is being triggered");
 
         if (Flender.isConnected()) {
             joinPoint.proceed();
         } else {
             String mode = getInternetAnnotationParameter(joinPoint);
 
-            if (mode == "silent") {
-                Flender.Toast("Silent works available");
-
-            } else if (mode == "alert") {
+            if (mode.equals("silent")) {
+            } else if (mode.equals("alert")) {
                 if (Flender.getInternetUnavailable() != null) {
                     Flender.getInternetUnavailable().flenderEvent();
                 } else {
@@ -75,10 +71,9 @@ class FlenderAspect {
         } else {
             String mode = getWiFiAnnotationParameter(joinPoint);
 
-            if (mode == "silent") {
-                Flender.Toast("Silent works available");
+            if (mode.equals("silent")) {
 
-            } else if (mode == "alert") {
+            } else if (mode.equals("alert")) {
                 if (Flender.getWiFiUnavailable() != null) {
                     Flender.getWiFiUnavailable().flenderEvent();
                 } else {
@@ -99,15 +94,13 @@ class FlenderAspect {
         } else {
             String mode = getMobileAnnotationParameter(joinPoint);
 
-            if (mode == "silent") {
-                Flender.Toast("Silent works available");
+            if (mode.equals("silent")) {
 
-            } else if (mode == "alert") {
+            } else if (mode.equals("alert")) {
                 if (Flender.getMobileUnavailable() != null) {
                     Flender.getMobileUnavailable().flenderEvent();
                 } else {
                     Flender.Toast("Mobile network not available");
-
                 }
             } else {
                 throw new UnsupportedModeException("Unsupported mode,leave parameter empty or set to Silent.");
@@ -118,7 +111,6 @@ class FlenderAspect {
     static String getInternetAnnotationParameter(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String value = signature.getMethod().getAnnotation(InternetRequired.class).value().toLowerCase();
-
         return value;
     }
 
@@ -135,4 +127,5 @@ class FlenderAspect {
 
         return value;
     }
+
 }

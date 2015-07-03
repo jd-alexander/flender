@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.flender.weaving.Flender;
 import com.flender.weaving.annotations.InternetRequired;
+import com.flender.weaving.listeners.InternetUnavailable;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         testMethod();
     }
 
-    @InternetRequired("Silent")
+    @InternetRequired
     public void testMethod()
     {
         Toast.makeText(this,"Method is being called",Toast.LENGTH_SHORT).show();
