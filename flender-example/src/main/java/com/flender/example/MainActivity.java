@@ -1,16 +1,13 @@
 package com.flender.example;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 import com.flender.weaving.Flender;
 import com.flender.weaving.annotations.InternetRequired;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +16,8 @@ public class MainActivity extends ActionBarActivity {
         Flender.init(this);
         test();
     }
-    @InternetRequired
+
+    @InternetRequired("Silent")
     public void test()
     {
     }

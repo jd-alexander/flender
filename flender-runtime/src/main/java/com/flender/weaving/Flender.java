@@ -8,6 +8,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import com.flender.weaving.listeners.InternetUnavailable;
+import com.flender.weaving.listeners.MobileUnavailable;
+import com.flender.weaving.listeners.WiFiUnavailable;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -15,6 +19,9 @@ import java.lang.ref.WeakReference;
  */
 public class Flender {
     private static WeakReference<Context> contextWeakReference;
+    private static InternetUnavailable internetUnavailable;
+    private static WiFiUnavailable wiFiUnavailable;
+    private static MobileUnavailable mobileUnavailable;
 
 
     public static void init(Context context) {
@@ -68,5 +75,27 @@ public class Flender {
         Toast.makeText(contextWeakReference.get(), text, Toast.LENGTH_LONG).show();
     }
 
+    public void setInternetUnavailableListener(InternetUnavailable internetUnavailableListener) {
+        this.internetUnavailable = internetUnavailableListener;
+    }
 
+    protected static InternetUnavailable getInternetUnavailable() {
+        return internetUnavailable;
+    }
+
+    protected static WiFiUnavailable getWiFiUnavailable() {
+        return wiFiUnavailable;
+    }
+
+    public static void setWiFiUnavailable(WiFiUnavailable wiFiUnavailable) {
+        Flender.wiFiUnavailable = wiFiUnavailable;
+    }
+
+    protected static MobileUnavailable getMobileUnavailable() {
+        return mobileUnavailable;
+    }
+
+    public static void setMobileUnavailable(MobileUnavailable mobileUnavailable) {
+        Flender.mobileUnavailable = mobileUnavailable;
+    }
 }

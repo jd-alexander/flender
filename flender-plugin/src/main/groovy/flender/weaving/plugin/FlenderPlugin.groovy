@@ -25,16 +25,12 @@ public class FlenderPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            debugCompile 'com.github.jd-alexander:flender-runtime:1.0'
+            compile 'com.github.jd-alexander:flender-runtime:1.0'
             // TODO this should come transitively
-            debugCompile 'org.aspectj:aspectjrt:1.8.5'
+            compile 'org.aspectj:aspectjrt:1.8.5'
         }
 
         variants.all { variant ->
-            if (!variant.buildType.isDebuggable()) {
-                log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
-                return;
-            }
 
             variant.dex.doFirst {
                 String[] args = [
