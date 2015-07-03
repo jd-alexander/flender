@@ -7,6 +7,7 @@ package com.flender.weaving;
 import android.util.Log;
 
 import com.flender.weaving.annotations.InternetRequired;
+import com.flender.weaving.exception.UnsupportedModeException;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,8 +21,7 @@ import org.aspectj.lang.reflect.MethodSignature;
  */
 
 @Aspect
-class FlenderAspect
-{
+class FlenderAspect {
 
     private static final String INTERNET = "execution(@com.flender.weaving.annotations.InternetRequired * *(..))";
     private static final String WIFI = "execution(@com.flender.weaving.annotations.WiFiRequired * *(..))";
@@ -44,99 +44,78 @@ class FlenderAspect
     public void checkInternetConnectivity(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.v("Aspect", "advice is being triggered");
 
-        if (Flender.isConnected())
-        {
+        if (Flender.isConnected()) {
             joinPoint.proceed();
-        } else
-        {
+        } else {
             String mode = getInternetAnnotationParameter(joinPoint);
 
-            if(mode=="silent")
-            {
+            if (mode == "silent") {
                 Flender.Toast("Silent works available");
 
-            }
-            else
-            {
-                if(Flender.getInternetUnavailable()!=null)
-                {
+            } else if (mode == "alert") {
+                if (Flender.getInternetUnavailable() != null) {
                     Flender.getInternetUnavailable().flenderEvent();
-                }
-                else
-                {
+                } else {
                     Flender.Toast("Internet not available");
 
                 }
+            } else {
+                throw new UnsupportedModeException("Unsupported mode,leave parameter empty or set to Silent.");
             }
         }
     }
 
     @Around("wiFiAnnotatedMethod()")
     public void checkWiFiConnectivity(ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.v("Aspect", "advice is being triggered");
 
-        if (Flender.isConnectedWifi())
-        {
+        if (Flender.isConnectedWifi()) {
             joinPoint.proceed();
-        } else
-        {
+        } else {
             String mode = getInternetAnnotationParameter(joinPoint);
 
-            if(mode=="silent")
-            {
+            if (mode == "silent") {
                 Flender.Toast("Silent works available");
 
-            }
-            else
-            {
-                if(Flender.getWiFiUnavailable()!=null)
-                {
+            } else if (mode == "alert") {
+                if (Flender.getWiFiUnavailable() != null) {
                     Flender.getWiFiUnavailable().flenderEvent();
-                }
-                else
-                {
+                } else {
                     Flender.Toast("WiFi not available");
 
                 }
+            } else {
+                throw new UnsupportedModeException("Unsupported mode,leave parameter empty or set to Silent.");
             }
         }
     }
 
     @Around("mobileAnnotatedMethod()")
     public void checkMobileConnectivity(ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.v("Aspect", "advice is being triggered");
 
-        if (Flender.isConnectedMobile())
-        {
+        if (Flender.isConnectedMobile()) {
             joinPoint.proceed();
-        } else
-        {
+        } else {
             String mode = getInternetAnnotationParameter(joinPoint);
 
-            if(mode=="silent")
-            {
+            if (mode == "silent") {
                 Flender.Toast("Silent works available");
 
-            }
-            else
-            {
-                if(Flender.getMobileUnavailable()!=null)
-                {
+            } else if (mode == "alert") {
+                if (Flender.getMobileUnavailable() != null) {
                     Flender.getMobileUnavailable().flenderEvent();
-                }
-                else
-                {
+                } else {
                     Flender.Toast("Mobile network not available");
 
                 }
+            } else {
+                throw new UnsupportedModeException("Unsupported mode,leave parameter empty or set to Silent.");
             }
         }
     }
 
-    static String getInternetAnnotationParameter(JoinPoint joinPoint)
-    {
+    static String getInternetAnnotationParameter(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        String value=signature.getMethod().getAnnotation(InternetRequired.class).value().toLowerCase();
+        String value = signature.getMethod().getAnnotation(InternetRequired.class).value().toLowerCase();
 
         return value;
     }
