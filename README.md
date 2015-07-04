@@ -47,7 +47,7 @@ Usage
 -----
 For connectivity checking to work Flender needs access to the current context so set it like this :          `Flender.init(this);` preferably in your application class or base activity. Once that's done, annotate away!.
 
-....
+
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ For connectivity checking to work Flender needs access to the current context so
     }
 }
 ```
-....
+
 
 You can also check for WiFi and Mobile connectivity with these annotations
 ```java
@@ -73,15 +73,14 @@ You can also check for WiFi and Mobile connectivity with these annotations
 @MobileRequired
 ```
 
-If for some reason you want toast to be shown eg. using Flender in a service class then simply pass silent as a parameter to
-the respective annotation 
+If for some reason you don't want toast to be shown eg. using Flender in a service class then simply pass silent as a parameter to the respective annotation 
 ```java
 @WiFiRequired("Silent")
 
 @InternetRequired("Silent")
 ```
 
-If yoo want to trigger custom actions based on the annotation being used you can use one of the listeners associated each annotation.
+If you want to trigger custom actions based on the annotation being used you can use one of the listeners associated each annotation.
 
 ```java
 
@@ -104,7 +103,7 @@ If yoo want to trigger custom actions based on the annotation being used you can
     {
     }
 ```
-Once these listeners are used toasts,won't be triggered.
+*Once these listeners are used toasts,won't be triggered.
 
 Contribution
 ------------
