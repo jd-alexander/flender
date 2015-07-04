@@ -4,6 +4,8 @@ before_install:
 org.gradle.jvmargs=-XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+HeapDumpOnOutOfMemoryError -Xmx2048m
 
 language: android
+jdk: oraclejdk7
+
 android:
   components:
     - build-tools-22.0.1
