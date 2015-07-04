@@ -10,11 +10,11 @@ if(connectivityUtil.isConnected(context))
 }
 else
 {
-   Toast.makeText(context, "Internet unavailable", LENGTH_SHORT).show;
+   Toast.makeText(context, "Internet unavailable", LENGTH_SHORT).show();
 }
 
 ```
-With Flender connectivity checking couldn't be easier. Just annoate your method with `@InternetRequired` and Flender does the result. A toast will be shown if there's no internet available and the method won't execute. 
+With Flender connectivity checking couldn't be easier. Just annoate your method with `@InternetRequired` and Flender does the rest. A toast will be shown if there's no internet available and the method won't execute. 
 
 ```java
 @InternetRequired
@@ -103,12 +103,12 @@ If you want to trigger custom actions based on the annotation being used you can
     {
     }
 ```
-*Once these listeners are used toasts,won't be triggered.
+Once these listeners are used toasts,won't be triggered.
 
 Contribution
 ------------
 
-Please fork  repository and contribute using pull requests.
+Please fork repository and contribute using pull requests.
 
 Any contributions, large or small, major features, bug fixes, additional language translations, unit/integration tests are welcomed and appreciated but will be thoroughly reviewed and discussed.
 
