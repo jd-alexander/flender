@@ -1,7 +1,7 @@
 # Flender [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jd-alexander/flender-plugin/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.github.jd-alexander/flender-plugin/)
 Annotation triggered connectivity checking for Android
 
-Aren't you tired of doing this everywhere all over your code? 
+Aren't you tired of doing this all over your code? 
 
 ```java
 if(connectivityUtil.isConnected(context))
